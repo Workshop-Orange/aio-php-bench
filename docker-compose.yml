@@ -1,0 +1,48 @@
+version: '2.3'
+
+services:
+  # SERVICE: cli81
+  cli81:
+    networks:
+      - amazeeio-network
+      - default
+    build:
+      context: .
+      dockerfile: lagoon/cli81.dockerfile
+    image: &cli81-image cli81-cli 
+    labels:
+      lagoon.type: cli
+    volumes_from: 
+      - container:amazeeio-ssh-agent
+
+  # SERVICE: cli82
+  cli82:
+    networks:
+      - amazeeio-network
+      - default
+    build:
+      context: .
+      dockerfile: lagoon/cli82.dockerfile
+    image: &cli82-image cli82-cli 
+    labels:
+      lagoon.type: cli
+    volumes_from: 
+      - container:amazeeio-ssh-agent
+      
+  # SERVICE: cli83
+  cli83:
+    networks:
+      - amazeeio-network
+      - default
+    build:
+      context: .
+      dockerfile: lagoon/cli83.dockerfile
+    image: &cli83-image cli83-cli 
+    labels:
+      lagoon.type: cli
+    volumes_from: 
+      - container:amazeeio-ssh-agent
+      
+networks:
+  amazeeio-network:
+    external: true
