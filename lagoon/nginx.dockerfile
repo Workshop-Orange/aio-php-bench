@@ -1,5 +1,5 @@
 FROM uselagoon/nginx
 
-COPY web /app
+COPY web /app/web
 
 ENV WEBROOT=web

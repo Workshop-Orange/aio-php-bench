@@ -12,7 +12,7 @@ services:
     image: &cli81-image cli81-cli 
     labels:
       lagoon.type: cli-persistent
-      lagoon.name: nginx
+      lagoon.persistent.name: nginx
       lagoon.persistent: /app/web/storage
     volumes_from: 
       - container:amazeeio-ssh-agent
@@ -28,7 +28,7 @@ services:
     image: &cli82-image cli82-cli 
     labels:
       lagoon.type: cli-persistent
-      lagoon.name: nginx
+      lagoon.persistent.name: nginx
       lagoon.persistent: /app/web/storage
     volumes_from: 
       - container:amazeeio-ssh-agent
@@ -44,7 +44,7 @@ services:
     image: &cli83-image cli83-cli 
     labels:
       lagoon.type: cli-persistent
-      lagoon.name: nginx
+      lagoon.persistent.name: nginx
       lagoon.persistent: /app/web/storage
     volumes_from: 
       - container:amazeeio-ssh-agent
