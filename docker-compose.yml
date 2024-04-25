@@ -11,7 +11,9 @@ services:
       dockerfile: lagoon/cli81.dockerfile
     image: &cli81-image cli81-cli 
     labels:
-      lagoon.type: cli
+      lagoon.type: cli-persistent
+      lagoon.name: nginx
+      lagoon.persistent: /app/web/storage
     volumes_from: 
       - container:amazeeio-ssh-agent
 
@@ -25,7 +27,9 @@ services:
       dockerfile: lagoon/cli82.dockerfile
     image: &cli82-image cli82-cli 
     labels:
-      lagoon.type: cli
+      lagoon.type: cli-persistent
+      lagoon.name: nginx
+      lagoon.persistent: /app/web/storage
     volumes_from: 
       - container:amazeeio-ssh-agent
       
@@ -39,10 +43,12 @@ services:
       dockerfile: lagoon/cli83.dockerfile
     image: &cli83-image cli83-cli 
     labels:
-      lagoon.type: cli
+      lagoon.type: cli-persistent
+      lagoon.name: nginx
+      lagoon.persistent: /app/web/storage
     volumes_from: 
       - container:amazeeio-ssh-agent
-  
+     
   # SERVICE: nginx
   nginx:
     networks:
@@ -52,9 +58,23 @@ services:
       context: .
       dockerfile: lagoon/nginx.dockerfile
     labels:
-      lagoon.type: nginx
+      lagoon.type: nginx-php-persistent
       lagoon.name: nginx
-      
+      lagoon.persistent: /app/web/storage
+
+  # SERVICE: php 
+  php:
+    networks:
+      - amazeeio-network
+      - default
+    build:
+      context: .
+      dockerfile: lagoon/php.dockerfile
+    labels:
+      lagoon.type: nginx-php-persistent
+      lagoon.name: nginx
+      lagoon.persistent: /app/web/storage/
+
 networks:
   amazeeio-network:
     external: true
