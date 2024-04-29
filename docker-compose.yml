@@ -1,55 +1,28 @@
 version: '2.3'
 
 services:
-  # SERVICE: cli81
-  cli81:
+  # SERVICE: cli
+  cli:
     networks:
       - amazeeio-network
       - default
     build:
       context: .
-      dockerfile: lagoon/cli81.dockerfile
-    image: &cli81-image cli81-cli 
+      dockerfile: lagoon/cli.dockerfile
+    image: &cli-image cli-cli 
     labels:
       lagoon.type: cli-persistent
       lagoon.persistent.name: nginx
       lagoon.persistent: /app/web/storage
     volumes_from: 
       - container:amazeeio-ssh-agent
+    environment:
+      LAGOON_PROJECT: aio-php-bench
+      LAGOON_ROUTE: http://aio-php-bench.docker.amazee.io
+      LAGOON_ENVIRONMENT: local
 
-  # SERVICE: cli82
-  cli82:
-    networks:
-      - amazeeio-network
-      - default
-    build:
-      context: .
-      dockerfile: lagoon/cli82.dockerfile
-    image: &cli82-image cli82-cli 
-    labels:
-      lagoon.type: cli-persistent
-      lagoon.persistent.name: nginx
-      lagoon.persistent: /app/web/storage
-    volumes_from: 
-      - container:amazeeio-ssh-agent
-      
-  # SERVICE: cli83
-  cli83:
-    networks:
-      - amazeeio-network
-      - default
-    build:
-      context: .
-      dockerfile: lagoon/cli83.dockerfile
-    image: &cli83-image cli83-cli 
-    labels:
-      lagoon.type: cli-persistent
-      lagoon.persistent.name: nginx
-      lagoon.persistent: /app/web/storage
-    volumes_from: 
-      - container:amazeeio-ssh-agent
-     
-  # SERVICE: nginx
+
+ # SERVICE: nginx
   nginx:
     networks:
       - amazeeio-network
@@ -61,6 +34,10 @@ services:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx
       lagoon.persistent: /app/web/storage
+    environment:
+      LAGOON_PROJECT: aio-php-bench
+      LAGOON_ROUTE: http://aio-php-bench.docker.amazee.io
+      LAGOON_ENVIRONMENT: local
 
   # SERVICE: php 
   php:
@@ -74,7 +51,12 @@ services:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx
       lagoon.persistent: /app/web/storage/
+    environment:
+      LAGOON_PROJECT: aio-php-bench
+      LAGOON_ROUTE: http://aio-php-bench.docker.amazee.io
+      LAGOON_ENVIRONMENT: local
 
 networks:
   amazeeio-network:
     external: true
+
