@@ -4,5 +4,5 @@ tasks:
   post-rollout:
     - run:
         name: Run bench
-        command: php /app/bench.php > /app/web/storage/php.txt
+        command: php /app/web/bench.php > /app/web/storage/php.txt
         service: cli
