@@ -3,14 +3,6 @@ docker-compose-yaml: docker-compose.yml
 tasks:
   post-rollout:
     - run:
-        name: Run 81 bench
-        command: php /app/bench.php > /app/web/storage/php81.txt
-        service: cli81
-    - run:
-        name: Run 82 bench
-        command: php /app/bench.php > /app/web/storage/php82.txt
-        service: cli82
-    - run:
-        name: Run 83 bench
-        command: php /app/bench.php > /app/web/storage/php83.txt
-        service: cli83
+        name: Run bench
+        command: php /app/bench.php > /app/web/storage/php.txt
+        service: cli
